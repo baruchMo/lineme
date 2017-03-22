@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="lineManageApp">
+<head>
+    <title>LineManager</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+   
+    <link href="../lib/css/angular-material.min.css" rel="stylesheet" />
+    <link href="../lib/css/material.min.css" rel="stylesheet" />
+    <link href="../lib/font/material/icons.css" rel="stylesheet" />
+    <link href="../lib/font/roboto/light/font.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <style>.repeatMe.ng-leave{display:none;}</style>
+  
+    <script src="../lib/angular.js"></script>   
+    <script src="../lib/angular-animate.min.js"></script>    
+    <script src="../lib/angular-aria.min.js"></script> 
+    <script src="../lib/angular-material.min.js"></script> 
+       
+    <script src="../view model/LinemanageCtrl.js"></script>
+    <script src="../services/GetSrvc.js"></script>
+    <script src="../services/PostSrvc.js"></script>
+    <script src="../models/PersonModel.js"></script>
+    <script src="../models/lineModel.js"></script>
+    <script src="../models/srvcTypModel.js"></script>
+    <script src="../models/bySupp.js"></script>
+    
+    
+    <script>
+        (function (app)
+        {
+            
+            app.controller('LinemanageCtrl', LinemanageCtrl)
+                .factory('PersonSrvc', PersonSrvc)
+                .factory('SelectSrvc', SelectSrvc)
+                
+                .config(function ($mdThemingProvider, $mdIconProvider) {
+                   var theme = $mdThemingProvider.theme('default');
+                   theme.primaryPalette('blue').accentPalette('green');
+
+                   $mdIconProvider.fontSet('md', 'material-icons');
+                
+                    
+        } );
+
+        })(angular.module('lineManageApp', ['ngAnimate','ngAria','ngMaterial']));
+
+    </script>
+</head>
+<body ng-controller="LinemanageCtrl">
+    <div ng-cloak>
+        <md-content><!-- cards select --> 
+            <div ng-hide="state.startline" class="mdl-card">          
+                <md-card class="mdl-color--light-blue-500 mdl-color-text--white">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Select Service</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <div ng-show="state.loaded" class="mdl-card__actions">
+                        <div ng-hide="state.loaded" class="loader"><md-progress-linear md-mode="indeterminate"></md-progress-linear></div>
+
+                        <input id="Name" type="text" ng-model="selectedService.Name" placeholder="Enter your name here" /><br />
+                        <select ng-model="selectedService.SuppCodeId">
+                            <option ng-repeat="service in serviceTyps" value="{{service.SupplierCode}}">
+                                {{service.Service}}
+                            </option>
+                        </select>
+                    </div>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click='selectServiceforPerson(selectedService)'>
+                            Send <md-icon>forward</md-icon>
+                        </md-button>
+                    </md-card-actions>
+            </div>
+            <div class="mdl-grid">
+                
+                 
+                <div class="mdl-cell mdl-cell--6-col">
+                    <md-toolbar ng-show="state.startline" class="md-accent" align="center">Choose Service to view the line</md-toolbar> <!-- cards supplier --> 
+                    <div class="mdl-grid">
+                        
+                        <div class="mdl-cell mdl-cell--4-col"  ng-repeat="item in bySupplier">                   
+                            <md-card ng-show="state.startline"   class="mdl-color--green-900 mdl-color-text--white">
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline"> {{item.NameServTyp}}</span>
+                                        <span class="md-subhead">Line Total: {{item.LineinTotal}}</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-actions layout="row" layout-align="end center">                                 
+                                    <md-button  class="md-icon-button" ng-click='slctSupplier(item)'> 
+                                        <md-tooltip md-autohide="true">Show Me The Line</md-tooltip>                                     
+                                        <md-icon>forward</md-icon>
+                                    </md-button>
+                                </md-card-actions>
+                            </md-card>
+
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <!-- table supplier --> 
+                <div class="mdl-cell mdl-cell--6-col">                    
+                    <md-toolbar ng-show="state.lineBy" class="md-accent" align="center">Choose Number in line to modify{{result}}</md-toolbar>
+                        <table ng-show="state.lineBy" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" align="center">
+                            
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric"></th>
+                                    <th>Actions</th>
+                                    <th>NumberinLine</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="repeatMe" ng-repeat="item in lineOrder|filter:slctSupplier.slctSup|orderBy:-PersonId as results">
+                                    <td class="mdl-data-table__cell--non-numeric"></td>
+                                    <td>
+                                        <md-button class="md-icon-button" ng-click='updateLine(item)'>
+                                            <md-tooltip md-autohide="true">Modify</md-tooltip>
+                                            <md-icon>edit</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button" ng-click='setDeal(item)'>
+                                            <md-tooltip md-autohide="true">To sign the deal</md-tooltip>
+                                            <md-icon class="md-primary">check_circle</md-icon>
+                                        </md-button>
+                                    </td>
+                                    <td>{{item.PersonId}}</td>
+                                    <td>{{item.NameServTyp}}</td>
+                                    <td>{{item.DateAndTime(date)}}</td>
+                                    <td>{{item.Price}}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    <table ng-show="state.log" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" align="center">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric"></th>
+                                <th>Deal Signed</th>
+                                <th>DealDate</th>   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="repeatMe" ng-repeat="item in lineOrder|filter:slctSupplier.slctSup">
+                                <td class="mdl-data-table__cell--non-numeric"></td>                             
+                                <td>{{item.Deal_setPrice}}</td>
+                                <td>{{item.DealDate}}</td>
+                              
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+</div>
+
+            </div>
+
+
+        </md-content>
+    </div>
+</body>
+</html>

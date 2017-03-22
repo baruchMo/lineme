@@ -1,0 +1,53 @@
+﻿<md-dialog   aria-label="Person Details">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            
+            Person Details{{currnetPerson.PersonId}}
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-gt-xs="column" layout-padding>
+        <div layout="column" layout-gt-xs="column">
+            <md-input-container>
+                <md-tooltip md-autohide="true">Show Me The Line</md-tooltip>
+                <label>PersonId</label>
+                <input ng-model="currnetPerson.PersonId" disabled>
+            </md-input-container>
+            <md-input-container>
+                <label>Service</label>                               
+                <md-select ng-model="selectedSrvc" md-selected-text="getSelectedInfo()">
+                    <md-optgroup label="Currnet Service: {{currnetPerson.NameServTyp}}">
+                        <md-option ng-value="service.Service" ng-repeat="service in SrvNme">
+                        {{service.Service}}
+                        </md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <label>DateAndTime</label>
+                <input ng-model="currnetPerson.DateAndTime" >
+            </md-input-container>
+
+            <md-input-container>
+                <label>Price</label>
+                <input ng-model="currnetPerson.Deal_setPrice" ng-change="currnetPerson.Deal_setPrice">
+            </md-input-container>
+
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="cancel()">
+            Cancel
+        </md-button>
+        <md-button ng-click="answer(currnetPerson)">
+           Modify
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
