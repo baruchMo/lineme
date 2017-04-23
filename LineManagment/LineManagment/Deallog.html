@@ -1,0 +1,62 @@
+﻿
+<md-dialog aria-label="Person Details">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+            Person Details : {{currnetPerson.PersonId}}
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-gt-xs="column" layout-padding>
+        <table ng-show="state.lineBy" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" align="center">
+
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric"></th>
+                    <th>Actions</th>
+                    <th>NumberinLine</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Price</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="repeatMe" ng-repeat="item in lineOrder|filter:slctSupplier.slctSup|orderby -PersonId as resulta">
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td>
+                        <md-button class="md-icon-button" ng-click='updatePerson(item)'>
+                            <md-tooltip md-autohide="true">Modify</md-tooltip>
+                            <md-icon class="md-primary">list</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click='setDeal(item)'>
+                            <md-tooltip md-autohide="true">Modify</md-tooltip>
+                            <md-icon class="md-accent">check_circle</md-icon>
+                        </md-button>
+                    </td>
+                    <td>{{item.PersonId}}</td>
+                    <td>{{item.NameServTyp}}</td>
+                    <td>{{item.DateAndTime}}</td>
+                    <td>{{item.Price}}</td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="answer(item)">
+            Deal!
+        </md-button>
+        <md-button ng-click="answer(item)">
+            Modify
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

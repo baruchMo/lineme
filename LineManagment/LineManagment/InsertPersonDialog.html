@@ -1,0 +1,45 @@
+﻿
+<md-dialog aria-label="Insert new person">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+           Insert new person
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout="column" layout-gt-xs="column">
+        <div layout="column" layout-gt-xs="column" layout-padding>
+            <md-input-container>
+                <label>Enter your name</label>
+                <input ng-model="setPerson.Name" placeholder="Enter your name here" />
+            </md-input-container>
+            <br />
+            <md-input-container>
+                <label>Choose Services</label>
+                <md-select ng-model="setPerson.SupplierCode" placeholder="Choose Service:">
+                    <md-optgroup label="Services">
+                        <md-option ng-value="item.SupplierCode" ng-repeat=" item in SrvNme">{{item.Service}}</md-option>
+                    </md-optgroup>
+
+                </md-select>
+            </md-input-container>
+
+
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-aligin="center">
+        <span flex></span>
+        <md-button  ng-click="answer(setPerson)">
+           Insert 
+        </md-button>
+     
+
+
+    </md-dialog-actions>
+</md-dialog>

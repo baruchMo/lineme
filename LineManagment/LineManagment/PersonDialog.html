@@ -1,0 +1,61 @@
+﻿
+<md-dialog   aria-label="Person Details">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            
+            Person Details : {{currnetPerson.PersonId}}
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content  layout="column" layout-gt-xs="column" > 
+        <div layout="column" layout-gt-xs="column" layout-padding>
+            <md-input-container>
+                <label>PersonId</label>
+                <input ng-model="currnetPerson.PersonId" ng-disabled="currnetPerson.state.statue">
+            </md-input-container>
+            <md-input-container aria-label="Service to choose">
+                <span>Currnet service is:  {{currnetPerson.NameServTyp}}</span>
+                <md-select ng-model="currnetPerson.state.SupplierCode" ng-disabled="currnetPerson.state.statue" ng-hide="currnetPerson.state.statue" placeholder="Update this person service line">
+                    <md-optgroup label="Services">
+                        <md-option ng-value="it.SupplierCode" ng-repeat="it in SrvNme">{{it.Service}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>DateAndTime</label>
+                <input ng-model=currnetPerson.DateAndTime ng-disabled="currnetPerson.state.statue">
+            </md-input-container>
+            <md-input-container ng-hide="currnetPerson.state.statue">
+                <label>Final price for curnnet service </label>
+                <input ng-model="currnetPerson.Price" ng-disabled="currnetPerson.state.statue">
+            </md-input-container>
+            <md-input-container ng-show="currnetPerson.state.statue">
+                <label> Final Deal</label>
+                <input ng-model="currnetPerson.Deal_setPrice" placeholder="Set the final price here! Numbers in Cash only!">
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-aligin="center">
+        <span flex></span>
+        <md-button ng-mousedown="currnetPerson.state.toDelete=true"  ng-click="answer(currnetPerson)">
+            Delete
+        </md-button>
+        <md-button ng-click="answer(currnetPerson)"ng-show="currnetPerson.state.statue">
+            Deal!
+        </md-button>
+        <md-button ng-click="answer(currnetPerson)" ng-hide="currnetPerson.state.statue">
+           Change Service
+        </md-button>      
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+         
+            
+            </md-dialog-actions>
+</md-dialog>
