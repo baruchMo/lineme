@@ -1,23 +1,24 @@
 ﻿function LinemanageCtrl($scope, $http, $mdDialog, getService, postService) {
     var getSrv = getService();
     var postIt = postService();
-
+  
     $scope.state =
-        {
+        {showThis:false,
             loaded: false,
             lineBy: false
         };
+    $scope.regex = { string: '\\w+', numbers: '\\d+', vaild: function (vaild) { if (vaild=== true) { }; }};
     
-   
+    
 
-     var actions =
-         {
-             getallSrvc: getSrv.getAllsrvc(function (allsrvc) {$scope.serviceTyps = allsrvc; $scope.state.loaded = true; }),
-             postperson: function postPerson(id, newName) { postIt.postpersonId(id, newName, function (vaild) { console.log(vaild); }); },
-             postsrv: function postSrv(id, slctSrvc) { postIt.postSrvc(id, slctSrvc, function (vaild) { console.log(vaild); refreshData();}); },
-          postsetprice:function postSetprice(id, supp, dprice) { postIt.postDeal(id, supp, dprice, function (vaild) { console.log(vaild); }); },
-          postlastupdate: function postlastUpdate(id, supp, price, sup) { postIt.postDeal(id, supp, price, function (vaild) { console.log(vaild); });actions.postsrv(id, sup); }
-         }
+    var actions =
+        {
+            getallSrvc: getSrv.getAllsrvc(function (allsrvc) { $scope.serviceTyps = allsrvc; $scope.state.loaded = true; }),
+            postperson: function postPerson(id, newName) { postIt.postpersonId(id, newName, function (vaild) { console.log(vaild); }); },
+            postsrv: function postSrv(id, slctSrvc) { postIt.postSrvc(id, slctSrvc, function (vaild) { console.log(vaild); refreshData(); }); },
+            postsetprice: function postSetprice(id, supp, dprice) { postIt.postDeal(id, supp, dprice, function (vaild) { console.log(vaild); }); },
+            postlastupdate: function postlastUpdate(id, supp, price, sup) { postIt.postDeal(id, supp, price, function (vaild) { console.log(vaild); }); actions.postsrv(id, sup); }
+        };
      
      function refreshData()
      {
@@ -25,15 +26,15 @@
          getSrv.getLine(function (liner) { $scope.lineOrder = liner; });
      };
 
-     refreshData();
-     actions.getallSrvc;
+     onload = refreshData(), actions.getallSrvc;
+     
 
      $scope.insertNewperson = function ()
     {
 
          $mdDialog.show({
              controller: DialogController,
-             templateUrl: 'InsertPersonDialog.html',
+             templateUrl: '/View/pages/InsertPersonDialog.html',
              parent: angular.element(document.body),
          
              clickOutsideToClose: false,
@@ -93,7 +94,7 @@
         function modifyStatus(item) {        
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: 'PersonDialog.html',
+            templateUrl: '/View/pages/PersonDialog.html',
             parent: angular.element(document.body),
             targetEvent: item,
             clickOutsideToClose: false,
@@ -113,6 +114,7 @@
             $scope.currnetPerson = details;
             $scope.currnetPerson.state = { statue: Status, Suppliercode: 0, toDelete: false };
             $scope.SrvNme = SrvcName;
+            $scope.digits = {};
 
 
             $scope.cancel = function () {

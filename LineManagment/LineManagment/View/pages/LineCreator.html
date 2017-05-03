@@ -1,0 +1,99 @@
+﻿
+<div ng-controller="LinemanageCtrl">
+    
+    <div ng-cloak>
+        
+      
+        <md-content><!-- cards select --> 
+                       
+            <div class="mdl-grid">
+
+
+                <div class="mdl-cell mdl-cell--6-col">
+
+                    <md-toolbar class="md-accent" align="center">Choose Service to view the line</md-toolbar>
+
+                    <md-button ng-show="state.loaded" class="md-icon-button md-primary" ng-click='insertNewperson()'>
+                        <md-tooltip>Insert new person to line</md-tooltip>
+                        <md-icon>person_add</md-icon>
+                    </md-button>
+                    
+                        <div class="mdl-grid">
+
+                            <div class="mdl-cell mdl-cell--4-col" ng-repeat="item in bySupplier">
+                                <md-card class="mdl-color--green-900 mdl-color-text--white">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <span class="md-headline"> {{item.NameServTyp}}</span>
+                                            <span class="md-subhead">Line Total: {{item.TotalinLine}}</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                    <md-card-actions layout="row" layout-align="end center">
+                                        <md-button class="md-icon-button" md-ink-ripple="false" ng-click='slctSupplier(item)'>
+                                            <md-tooltip md-autohide="true">Show me the service line</md-tooltip>
+                                            <md-icon>forward</md-icon>
+                                        </md-button>
+                                    </md-card-actions>
+                                </md-card>
+
+                            </div>
+                        </div>
+                   
+                    </div>
+
+
+
+                    <!-- table supplier -->
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <md-toolbar ng-show="state.lineBy" class="md-accent" align="center">Choose Number in line to modify</md-toolbar>
+                        <table ng-show="state.lineBy" class="mdl-data-table mdl-js-data-table" align="center">
+
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">Actions</th>
+                                    <th class="mdl-data-table__cell--non-numeric">Priority</th>
+                                    <th class="mdl-data-table__cell--non-numeric">Number in Line</th>
+                                    <th class="mdl-data-table__cell--non-numeric">Service</th>
+                                    <th class="mdl-data-table__cell--non-numeric">Suggsted Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="repeatMe" ng-repeat="item in lineOrder|filter:slctSupplier.slctSup track by $index">
+                                    <td class="mdl-data-table__cell--non-numeric">
+
+
+                                        <md-button class="md-icon-button" ng-click="personActions.deletePerson(item)">
+                                            <md-tooltip md-autohide="true">Delete this person from line</md-tooltip>
+                                            <md-icon class="md-primary">clear</md-icon>
+                                        </md-button>
+
+                                        <md-button class="md-icon-button" ng-click='personActions.updatePerson(item)'>
+                                            <md-tooltip md-autohide="true">Change details</md-tooltip>
+                                            <md-icon class="md-primary">list</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button" ng-click='personActions.setDeal(item)'>
+                                            <md-icon class="md-accent">check_circle</md-icon>
+                                            <md-tooltip md-autohide="true">Set Deal Price</md-tooltip>
+                                        </md-button>
+
+                                    </td>
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.PersonId}}</td>
+                                    <td>{{item.NameServTyp}}</td>
+                                    <td>{{item.Price}}</td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                
+
+            </div>
+        </md-content>
+    </div>
+    
+</div>
+

@@ -1,0 +1,67 @@
+﻿
+<md-dialog   aria-label="Person Details">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            
+            Person Details : {{currnetPerson.PersonId}}
+            <span flex></span>
+           
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content  layout="column" layout-gt-xs="column" > 
+        <form  class="digits" name="digits" layout="column" layout-gt-xs="column" layout-padding novalidate>
+            <div class="form-group">
+                <label for="p">PersonId</label>
+                <input type="text" class="form-control" id="p" ng-model="currnetPerson.PersonId" disabled>
+            </div>
+            <md-input-container aria-label="Service to choose">
+                <span>Currnet service is:  {{currnetPerson.NameServTyp}}</span>
+                <md-select ng-model="currnetPerson.state.SupplierCode" ng-disabled="currnetPerson.state.statue" ng-hide="currnetPerson.state.statue" placeholder="Update this person service line">
+                    <md-optgroup label="Services">
+                        <md-option ng-value="it.SupplierCode" ng-repeat="it in SrvNme">{{it.Service}}</md-option>
+                    </md-optgroup>
+                </md-select>
+            </md-input-container>
+            <div class="form-group">
+                <label for="d">DateAndTime</label>
+                <input type="text" class="form-control" id="d" ng-model=currnetPerson.DateAndTime disabled>
+            </div>
+            <div class="form-group"  ng-hide="currnetPerson.state.statue">
+                <label for="fpc">Final price for curnnet service </label>
+                <input type="text" class="form-control" id="fpc" ng-model="currnetPerson.Price" ng-disabled="currnetPerson.state.statue" ng-pattern="/^(\d)+$/">  
+                
+                <p class="help-block" ng-show="digits.currnetPerson.Price.$error.pattern">Numbers only, please.</p>
+            </div>
+            {{digits.currnetPerson.Price.$error.pattern}}
+            <div class="form-group" ng-show="currnetPerson.state.statue">
+                <label for="fp"> Final Deal</label>
+                <input type="text" id="fp" class="form-control" ng-model="currnetPerson.Deal_setPrice" placeholder="Set the final price here! Numbers in Cash only!" ng-pattern="/^(\d)+$/">
+                <p class="help-block" ng-show="digits.nums.$error.pattern">Numbers only, please.</p>
+            </div>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-aligin="center">
+        <span flex></span>
+        <md-button class="md-icon-button" ng-mousedown="currnetPerson.state.toDelete=true" ng-click="answer(currnetPerson)">
+            <md-tooltip md-autohide="true">Delete this person from line</md-tooltip>
+            <md-icon aria-label="Close dialog">delete</md-icon>
+        </md-button>
+      
+        <md-button ng-click="answer(currnetPerson)"ng-show="currnetPerson.state.statue">
+            Deal!
+        </md-button>
+        <md-button t ng-click="answer(currnetPerson)" ng-hide="currnetPerson.state.statue" ng-disabled="!digits.$vaild">
+           Change Service
+        </md-button>      
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+                    
+            </md-dialog-actions>
+</md-dialog>

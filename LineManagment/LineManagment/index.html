@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html ng-app="spaApp">
+<head>   
+    <title>Index</title>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link href="View/lib/css/myApp.css" rel="stylesheet" />
+    <link href="View/lib/css/angular-material.min.css" rel="stylesheet" />
+    <link href="View/lib/css/material.min.css" rel="stylesheet" />
+    <link href="View/lib/font/roboto/light/font.css" rel="stylesheet" />
+    <link href="View/lib/font/material/icons.css" rel="stylesheet" />
+    <link href="View/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" type="x-icon" />
+
+    <script src="View/lib/angular.min.js"></script>
+    <script src="View/lib/angular-animate.min.js"></script>
+    <script src="View/lib/angular-aria.min.js"></script>
+    <script src="View/lib/angular-route.min.js"></script>
+    <script src="View/lib/angular-material.js"></script>
+
+
+    <script src="View/view model/LinemanageCtrl.js"></script>
+    <script src="View/services/getServ.js"></script>
+    <script src="View/services/postSrvc.js"></script>
+    <script src="View/models/bySupp.js"></script>
+    <script src="View/models/lineModel.js"></script>
+    <script src="View/models/PersonModel.js"></script>
+    <script src="View/models/srvcTypModel.js"></script>
+    <script src="View/configRoute/config.js"></script>
+    <script src="View/view model/mainSctrl.js"></script>
+    <base href="/index" />
+    <script>
+        (function (app) {
+
+            app.controller('mainSctrl', mainSctrl)
+                .controller('LinemanageCtrl', LinemanageCtrl)
+                .factory('getService', getService)
+                .factory('postService', postService)
+                .config(mySpa);
+        })(angular.module('spaApp', ['ngAnimate', 'ngAria', 'ngMaterial','ngRoute']))
+    </script>
+</head>
+<body ng-controller="mainSctrl">
+    <md-menu>
+        <md-button md-colors="{background: 'accent-100'}" aria-label="Menu" class="md-icon-button" ng-mouseenter="$mdMenu.open()">      
+            <md-icon class="md-primary">menu</md-icon>
+        </md-button>
+        <md-menu-content  md-colors="{background: 'primary-300-0.70'}" width="2" ng-mouseleave="$mdMenu.close()">
+            
+                <div>
+                    <md-menu-item> 
+                        <span>Menu</span>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button href="/">Home</md-button>
+                    </md-menu-item>
+                        <md-menu-item><md-button href="contact">Contact</md-button></md-menu-item>
+                        <md-menu-item><md-button href="Linecreator">Line Creator</md-button></md-menu-item>
+
+</div>
+            
+    </md-menu>          
+    <div ng-view></div>
+   
+ 
+</body>
+</html>

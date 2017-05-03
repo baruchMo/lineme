@@ -13,6 +13,7 @@
                 if (ko) ko(error);
             });
         };
+
         this.getAllsrvc = function (ok, ko) {
             $http.get('/api/Linemange/orderline/ServiceTypes').then(function (response) {
 
