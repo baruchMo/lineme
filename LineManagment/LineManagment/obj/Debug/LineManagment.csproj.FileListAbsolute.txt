@@ -62,3 +62,7 @@ C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\r
 C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\roslyn\System.Xml.XmlDocument.dll
 C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\roslyn\System.Xml.XPath.dll
 C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\BL.dll
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\DAL.dll
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\BL.pdb
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\LineManagment\bin\DAL.pdb

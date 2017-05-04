@@ -1,0 +1,7 @@
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\bin\Debug\BL.dll
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\bin\Debug\BL.pdb
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\bin\Debug\DAL.dll
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\bin\Debug\DAL.pdb
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\obj\Debug\BL.csprojResolveAssemblyReference.cache
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\obj\Debug\BL.dll
+C:\Users\hbm22\Documents\MyProj\Linemanagement\LineManagment\BL\obj\Debug\BL.pdb

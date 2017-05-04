@@ -7,7 +7,7 @@
             loaded: false,
             lineBy: false
         };
-    $scope.regex = { string: '\\w+', numbers: '\\d+', vaild: function (vaild) { if (vaild=== true) { }; }};
+    $scope.regex = { string: '\\w+', numbers: '\\d+'};
     
     
 
@@ -24,7 +24,7 @@
      {
          getSrv.getsrvcBySupp(function (bysupp) { $scope.bySupplier = bysupp; });
          getSrv.getLine(function (liner) { $scope.lineOrder = liner; });
-     };
+     }
 
      onload = refreshData(), actions.getallSrvc;
      
@@ -76,7 +76,7 @@
 
 
              };
-         };
+         }
 
      
     
@@ -88,7 +88,7 @@
         $scope.state.lineBy = true;
 
      };
-    $scope.personActions = { setDeal: function (item) { $scope.isSet = true; modifyStatus(item) }, updatePerson: function (item) { $scope.isSet = false; modifyStatus(item); }, deletePerson: function (item) { postIt.deletePerson(item.PersonId, item.SuppCodeId, function (vaild) { console.log(vaild); refreshData(); }); } };
+    $scope.personActions = { setDeal: function (item) { $scope.isSet = true; modifyStatus(item); }, updatePerson: function (item) { $scope.isSet = false; modifyStatus(item); }, deletePerson: function (item) { postIt.deletePerson(item.PersonId, item.SuppCodeId, function (vaild) { console.log(vaild); refreshData(); }); } };
     $scope.setDeal = function (item) { $scope.isSet = true; modifyStatus(item); };
     $scope.updatePerson = function (item) { $scope.isSet = false; modifyStatus(item);};
         function modifyStatus(item) {        
@@ -127,9 +127,9 @@
 
 
             };
-        };
+        }
 
-    };
+    }
    
 
    
