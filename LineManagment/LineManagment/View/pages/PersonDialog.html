@@ -14,7 +14,7 @@
     </md-toolbar>
 
     <md-dialog-content  layout="column" layout-gt-xs="column" > 
-        <form  class="digits" name="digits" layout="column" layout-gt-xs="column" layout-padding novalidate>
+        <form  class="digits" name="myform" layout="column" layout-gt-xs="column" layout-padding novalidate>
             <div class="form-group">
                 <label for="p">PersonId</label>
                 <input type="text" class="form-control" id="p" ng-model="currnetPerson.PersonId" disabled>
@@ -31,17 +31,17 @@
                 <label for="d">DateAndTime</label>
                 <input type="text" class="form-control" id="d" ng-model=currnetPerson.DateAndTime disabled>
             </div>
-            <div class="form-group"  ng-hide="currnetPerson.state.statue">
-                <label for="fpc">Final price for curnnet service </label>
-                <input type="text" class="form-control" id="fpc" ng-model="currnetPerson.Price" ng-disabled="currnetPerson.state.statue" ng-pattern="/^(\d)+$/">  
-                
-                <p class="help-block" ng-show="digits.currnetPerson.Price.$error.pattern">Numbers only, please.</p>
-            </div>
-            {{digits.currnetPerson.Price.$error.pattern}}
+                <div class="form-group" ng-class="{ 'has-error': myform.fpcn.$touched && myform.fpcn.$invalid }" ng-hide="currnetPerson.state.statue">
+                    <label for="fpc">Final price for curnnet service </label>
+                    <input type="text" name="fpcn" class="form-control" id="fpc" ng-model="currnetPerson.Price" ng-pattern="reg" required>
+                    <p class="help-block" ng-show="myform.fpcn.$error.pattern">Numbers only, please.</p>
+                    <p class="help-block" ng-show="myform.fpcn.$error.required">Required please insert price</p>
+                </div>        
             <div class="form-group" ng-show="currnetPerson.state.statue">
                 <label for="fp"> Final Deal</label>
-                <input type="text" id="fp" class="form-control" ng-model="currnetPerson.Deal_setPrice" placeholder="Set the final price here! Numbers in Cash only!" ng-pattern="/^(\d)+$/">
-                <p class="help-block" ng-show="digits.nums.$error.pattern">Numbers only, please.</p>
+                <input type="text" id="fp" name="fpm" class="form-control" ng-model="currnetPerson.Deal_setPrice" placeholder="Set the final price here! Numbers in Cash only!" ng-pattern="reg" required>
+                <p class="help-block" ng-show="myform.fpm.$error.pattern">Numbers only, please.</p>
+                <p class="help-block" ng-show="myform.fpcn.$error.required">Required please insert price</p>
             </div>
         </form>
     </md-dialog-content>
@@ -53,10 +53,10 @@
             <md-icon aria-label="Close dialog">delete</md-icon>
         </md-button>
       
-        <md-button ng-click="answer(currnetPerson)"ng-show="currnetPerson.state.statue">
+        <md-button ng-click="answer(currnetPerson)"ng-show="currnetPerson.state.statue" ng-disabled="!myform.fpm.$valid">
             Deal!
         </md-button>
-        <md-button t ng-click="answer(currnetPerson)" ng-hide="currnetPerson.state.statue" ng-disabled="!digits.$vaild">
+        <md-button t ng-click="answer(currnetPerson)" ng-hide="currnetPerson.state.statue" ng-disabled="!myform.fpcn.$valid">
            Change Service
         </md-button>      
             <md-button ng-click="cancel()">

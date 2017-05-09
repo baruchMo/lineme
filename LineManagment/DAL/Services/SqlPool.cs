@@ -6,9 +6,9 @@ namespace DAL.Services
     {
         static SqlPool()
         {
-            LineMsErvice = new Services.SqlService("LineConn");
+            LineMsErvice = new DAL.Services.SqlService("LineConn");
         }
 
-        public static Services.SqlService LineMsErvice { get; private set; }
+        public static DAL.Services.SqlService LineMsErvice { get; private set; }
     }
 }

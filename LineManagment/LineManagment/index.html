@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html ng-app="spaApp">
 <head>   
-    <title>Index</title>
+    <title>Line creator</title>
    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link href="View/lib/css/myApp.css" rel="stylesheet" />
@@ -41,27 +41,30 @@
     </script>
 </head>
 <body ng-controller="mainSctrl">
-    <md-menu>
-        <md-button md-colors="{background: 'accent-100'}" aria-label="Menu" class="md-icon-button" ng-mouseenter="$mdMenu.open()">      
-            <md-icon class="md-primary">menu</md-icon>
-        </md-button>
-        <md-menu-content  md-colors="{background: 'primary-300-0.70'}" width="2" ng-mouseleave="$mdMenu.close()">
-            
-                <div>
-                    <md-menu-item> 
-                        <span>Menu</span>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button href="/">Home</md-button>
-                    </md-menu-item>
-                        <md-menu-item><md-button href="contact">Contact</md-button></md-menu-item>
-                        <md-menu-item><md-button href="Linecreator">Line Creator</md-button></md-menu-item>
+    <div ng-cloak>
+     <md-toolbar class="md-primary"><div class="toolbar tools"> 
+         <md-menu>
+    <md-button md-colors="{background: 'accent-100'}" aria-label="Menu" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+        <md-icon class="md-primary">menu</md-icon>
+    </md-button>
+    <md-menu-content md-colors="{background: 'primary-300-0.70'}" width="2" ng-mouseleave="$mdMenu.close()">
 
-</div>
-            
-    </md-menu>          
-    <div ng-view></div>
-   
- 
+        <div>
+            <md-menu-item>
+                <span>Menu</span>
+            </md-menu-item>
+            <md-menu-item><md-button href="/">Intrudaction</md-button></md-menu-item>
+            <md-menu-item><md-button href="Linecreator">Line Creator</md-button></md-menu-item>
+            <md-menu-item><md-button href="contact">Contact</md-button></md-menu-item>
+        </div>
+
+</md-menu>
+         <span flex>The Line Creator</span>
+         </div>
+        </md-toolbar>  
+        
+        <div ng-view></div>
+    </div>
+    <footer class="foot">Copyrights Baruch Montiano</footer>
 </body>
 </html>

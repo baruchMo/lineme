@@ -8,9 +8,10 @@ using System.Reflection;
 namespace DAL.Services
 {  
     public class SqlService : IDisposable
-    {     
+    { 
         public SqlService(string connectionStringName) // c'tor
         {
+            
             var config = ConfigurationManager.ConnectionStrings[connectionStringName];
 
             ConnectionString = config.ConnectionString;
@@ -63,7 +64,7 @@ namespace DAL.Services
             {
                 var cmd = new SqlCommand(command, connection)
                 {
-                    CommandType = System.Data.CommandType.StoredProcedure
+                    CommandType = CommandType.StoredProcedure
                 };
 
                 if (parameters.Length > 0)
@@ -117,7 +118,7 @@ namespace DAL.Services
             {
                 var cmd = new SqlCommand(command, connection)
                 {
-                    CommandType = System.Data.CommandType.StoredProcedure
+                    CommandType = CommandType.StoredProcedure
                 };
 
                 if (parameters.Length > 0)

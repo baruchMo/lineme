@@ -12,34 +12,30 @@
         </div>
     </md-toolbar>
 
-    <md-dialog-content layout="column" layout-gt-xs="column">
-        <div layout="column" layout-gt-xs="column" layout-padding>
-            <md-input-container>
-                <label>Enter your name</label>
-                <input ng-model="setPerson.Name" placeholder="Enter your name here" />
-            </md-input-container>
-            <br />
+    <md-dialog-content>
+        <form name="nickf" layout="column" layout-gt-xs="column" layout-padding novalidate>
+            <div class="form-group">
+                <label>Enter your name or nick</label><br />
+                <input type="text" ng-model="setPerson.Name" name="nick" placeholder="Enter your name or nickname here" ng-pattern="reg" required />
+                <p class="help-block" ng-show="nickf.nick.$error.pattern">Letters only, please.</p>
+                <p class="help-block" ng-show="nickf.nick.$error.required">Name is required, please.</p>
+            </div>
+           
             <md-input-container>
                 <label>Choose Services</label>
                 <md-select ng-model="setPerson.SupplierCode" placeholder="Choose Service:">
                     <md-optgroup label="Services">
                         <md-option ng-value="item.SupplierCode" ng-repeat=" item in SrvNme">{{item.Service}}</md-option>
                     </md-optgroup>
-
                 </md-select>
             </md-input-container>
-
-
-        </div>
+        </form>
     </md-dialog-content>
 
     <md-dialog-actions layout="row" layout-aligin="center">
-        <span flex></span>
-        <md-button  ng-click="answer(setPerson)">
+        
+        <md-button ng-click="answer(setPerson)" ng-disabled="!nickf.nick.$valid">
            Insert 
         </md-button>
-     
-
-
     </md-dialog-actions>
 </md-dialog>

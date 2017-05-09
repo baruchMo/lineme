@@ -1,9 +1,9 @@
 ﻿function mySpa($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider)
 {
-    $routeProvider.when('/', { templateUrl: '/View/pages/instructions.html' })
-    .when('/contact', { templateUrl: '/View/pages/contact.html' })
-        .when('/Linecreator', { templateUrl: '/View/pages/LineCreator.html', cotroller:'LinemanageCtrl' })
-        .otherwise({ redirectTo: '/index.html' });
+    $routeProvider.when('/', { templateUrl: '/View/pages/instructions.html',CSS:'/View/lib/css/bootstrap.min.css' })
+        .when('/contact', { templateUrl: '/View/pages/contact.html',CSS:'/View/lib/css/bootstrap.min.css' })
+        .when('/Linecreator', { templateUrl: '/View/pages/LineCreator.html', cotroller: 'LinemanageCtrl', CSS: ['/View/lib/css/bootstrap.min.css','View/lib/css/myApp.css'] })
+        .otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true).hashPrefix('!');
 

@@ -6,6 +6,13 @@
 {
     display: none;
 }
+ .foot
+ {
+     position:absolute;
+     top:800px;
+     opacity:0.0;
+     
+ }
 
 
 
